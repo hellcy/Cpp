@@ -1,4 +1,7 @@
 #include <iostream>
+#include <exception>
+#include <stdexcept>
+
 
 using namespace std;
 
@@ -22,7 +25,7 @@ void fun2()
 	try {
 		func3();
 	}
-	catch(const exception e) {
+	catch(const exception& e) {
 		cout << "10 ";
 		throw 2;
 	}
@@ -32,7 +35,11 @@ void fun2()
 	}
 }
 
-
+void func1() {
+	func2();
+	cout << "func1 ";
+	throw 1;
+}
 
 int main()
 {
@@ -42,7 +49,10 @@ int main()
 	catch(int i) {
 		cout << i;
 	}
-	catch (const exception e) {
+	catch (const exception& e) {
 		cout << e.what();
 	}
 }
+
+
+//func3 5 func1 1
