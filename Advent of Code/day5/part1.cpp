@@ -4,6 +4,7 @@
 #include<string>
 #include <cstdio>
 #include <cctype>
+
 using namespace std;
 
 int main() {
@@ -22,12 +23,8 @@ int main() {
    {
 	   for (int i = 0; i < str.length(); i++)
 	   {
-	   		 //cout << str[i];
 	   		 upper = toupper(str[i]);
 	   		 lower = tolower(str[i]);
-	   		 //cout << upper;
-	   		 //cout << lower;
-	   		 //cout << str[i + 1];
 	   		if ((str[i] != str[i + 1] && upper == str[i+1]) || (str[i] != str[i + 1] && lower == str[i+1]))
 	   		{
 	   			cout << str[i] << "\n";
@@ -35,7 +32,6 @@ int main() {
 	   			i--;
 	   			nextRound = true;
 	   		}
-	   		//cout << str << "\n";
 	   }
 	   if (nextRound) flag = true;
 	   else flag = false;
