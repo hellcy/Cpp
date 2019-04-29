@@ -1,0 +1,4 @@
+Step P must be finished before step R can begin.
+Step V must be finished before step J can begin.
+Step O must be finished before step K can begin.
+Step S must be finished before step M can begin.
