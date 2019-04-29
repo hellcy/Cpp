@@ -3,42 +3,46 @@ import re
 def points():
     return [
         (x, y)
-        for x in range(0,359)
-        for y in range(0,359)
+        for x in range(46,348)
+        for y in range(43,360)
     ]
 
+def calDistance(point, coordinate):
+	return abs(point[0] - coordinate[0]) + abs(point[1] - coordinate[1])
+
 with open("input.txt") as file:
-    overlap = 0
     coordinates = []
     for line in file.readlines():
     	coordinates.append(
-    		{
-    			"x": int(line.rstrip().split(',')[0]),
-    			"y": int(line.rstrip().split(',')[1].strip()),
-    		}
+    		(
+    			int(line.rstrip().split(',')[0]),
+    			int(line.rstrip().split(',')[1].strip()),
+    		)
 		)
+#print(points())
+print(coordinates)
+minimum = 1000000
+closestPointCount = {}
 
-    print(coordinates)
+for point in points():
+	for coordinate in coordinates:
+		temp = calDistance(point, coordinate)
+		tempPoint = coordinate
+		if temp < minimum:
+			minimum = temp
+			minimumPoint = tempPoint
+		elif temp == minimum:
+			minimumPoint = (-1,-1)
+	#print(minimum)
+	#print(point)
+	#print(minimumPoint)
+	if minimumPoint in closestPointCount:
+		closestPointCount[minimumPoint] += 1
+	else:
+		closestPointCount[minimumPoint] = 1
+	minimum = 1000000
 
-    overlaps = {}
+print(closestPointCount)
 
-	for point in points():
-		print(point)
-
-    # for claim in parsed_claims:
-    #     for increment in increments(claim):
-    #         if increment in overlaps:
-    #             overlaps[increment] += 1
-    #         else:
-    #             overlaps[increment] = 1
-    # overlapped_area = 0
-    # for overlap in overlaps.values():
-    #     if overlap > 1:
-    #         overlapped_area += 1
-    # print(overlapped_area)
-
-    # for claim in parsed_claims:
-    #     if all(overlaps[increment] == 1 for increment in increments(claim)):
-    #         print(claim)
-
-    # print(parsed_claims)
+maximum = max(closestPointCount, key=closestPointCount.get)
+print(maximum, closestPointCount[maximum])
