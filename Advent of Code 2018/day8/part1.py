@@ -1,9 +1,8 @@
 mainList = []
 
-with open("test.txt") as file:
-	mainList = file.read().split(" ")
-	mainList = list(map(int, mainList[0]))
-
+with open("test.txt") as input_file:
+    mainList = [line.strip().split() for line in input_file]
+    mainList = list(map(int, mainList[0]))
 answer = 0
 
 # calculate the value from current list
@@ -28,12 +27,13 @@ def cal(mainList, nodeNum = 1):
 	answer = 0
 	pos = 0
 	for child in range(nodeNum):
-		childNodeNum = int(mainList[pos])
-		metaEntriesNum = int(mainList[pos + 1])
+		header = mainList[pos:pos + 2]
+		childNodeNum = header[0]
+		metaEntriesNum = header[1]
 		if childNodeNum == 0:
 			pos += 2 + metaEntriesNum
 			answer += sum(mainList[pos - metaEntriesNum:pos])
-		elif childNodeNum > 0:
+		else:
 			newPos = cal(mainList[pos + 2:],childNodeNum)
 			pos += newPos + metaEntriesNum
 			answer += sum(mainList[pos - metaEntriesNum:pos])
