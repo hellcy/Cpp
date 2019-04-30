@@ -51,6 +51,7 @@ while len(ready) > 0:
 		if count == 1:
 			ready.append(temp)
 		count = 0
+	print(ready)
 
 	# change the value so it won't count in the future rounds
 	for job in jobs:
