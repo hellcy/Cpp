@@ -16,7 +16,6 @@ int main() {
       ss << f.rdbuf(); // reading data
       strFull = ss.str();
    }
-   //cout<<str;
    char upper, lower;
    bool flag = true;
    bool nextRound = false;
@@ -37,7 +36,6 @@ int main() {
 		   		 lower = tolower(str[i]);
 		   		if ((str[i] != str[i + 1] && upper == str[i+1]) || (str[i] != str[i + 1] && lower == str[i+1]))
 		   		{
-		   			//cout << str[i] << "\n";
 		   			str.erase(i, 2);
 		   			i--;
 		   			nextRound = true;
@@ -50,6 +48,4 @@ int main() {
 	   flag = true;
 	   cout << str.length() << "\n";
    }
-
-   //cout << str.length() << "\n";
 }

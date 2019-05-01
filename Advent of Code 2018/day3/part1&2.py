@@ -22,6 +22,8 @@ with open("input.txt") as claims:
                 "height": int(m.group(5)),
             }
         )
+
+    print(parsed_claims)
     overlaps = {}
     for claim in parsed_claims:
         for increment in increments(claim):
