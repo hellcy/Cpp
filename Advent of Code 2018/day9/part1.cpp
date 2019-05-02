@@ -6,18 +6,20 @@
 #include <sstream>
 #include <list>
 #include <string>
+#include <iterator> 
+#include <map> 
 using namespace std; 
   
 // Structure of a Node 
 struct Node 
 { 
-    int data; 
+    long long data; 
     struct Node *next; 
     struct Node *prev; 
 }; 
   
 // Function to insert at the end 
-void insertEnd(struct Node** start, int value) 
+void insertEnd(struct Node** start, long long value) 
 { 
     // If the list is empty, create a single node 
     // circular and doubly list 
@@ -54,7 +56,7 @@ void insertEnd(struct Node** start, int value)
   
 // Function to insert Node at the beginning 
 // of the List, 
-void insertBegin(struct Node** start, int value) 
+void insertBegin(struct Node** start, long long value) 
 { 
     // Pointer points to last Node 
     struct Node *last = (*start)->prev; 
@@ -77,8 +79,8 @@ void insertBegin(struct Node** start, int value)
 // Function to insert node with value as value1. 
 // The new node is inserted after the node with 
 // with value2 
-void insertAfter(struct Node** start, int value1, 
-                                      int value2) 
+void insertAfter(struct Node** start, long long value1, 
+                                      long long value2) 
 { 
     struct Node* new_node = new Node; 
     new_node->data = value1; // Inserting the data 
@@ -101,25 +103,13 @@ void display(struct Node* start)
 { 
     struct Node *temp = start; 
   
-    printf("\nTraversal in forward direction \n"); 
     while (temp->next != start) 
     { 
-        printf("%d ", temp->data); 
+        printf("%lld ", temp->data); 
         temp = temp->next; 
     } 
-    printf("%d ", temp->data); // now temp is the last node in the list. in this case, 8
-    printf("%d ", temp->next->data); 
-    printf("%d ", temp->prev->data); 
-
-    printf("\nTraversal in reverse direction \n"); 
-    Node *last = start->prev; 
-    temp = last; 
-    while (temp->prev != last) 
-    { 
-        printf("%d ", temp->data); 
-        temp = temp->prev; 
-    } 
-    printf("%d ", temp->data); 
+    printf("%lld ", temp->data); // now temp is the last node in the list.
+    printf("\n");
 } 
 
 list<string> splitFile(string str) 
@@ -152,31 +142,6 @@ void print(std::list<std::string> const &list)
 /* Driver program to test above functions*/
 int main() 
 { 
-    /* Start with the empty list */
-    struct Node* start = NULL; 
-  
-    // Insert 5. So linked list becomes 5->NULL 
-    insertEnd(&start, 5); 
-  
-    // Insert 4 at the beginning. So linked  
-    // list becomes 4->5 
-    insertBegin(&start, 4); 
-  
-    // Insert 7 at the end. So linked list 
-    // becomes 4->5->7 
-    insertEnd(&start, 7); 
-  
-    // Insert 8 at the end. So linked list  
-    // becomes 4->5->7->8 
-    insertEnd(&start, 8); 
-  
-    // Insert 6, after 5. So linked list  
-    // becomes 4->5->6->7->8 
-    insertAfter(&start, 6, 5); 
-  
-    printf("Created circular doubly linked list is: "); 
-    display(start); 
-
     ifstream f("input.txt"); //taking file as inputstream
     string str;
     if(f) {
@@ -187,7 +152,7 @@ int main()
 
     string word = ""; 
     int playerNum = 0;
-    int ballNum = 0;
+    long ballNum = 0;
     int count = 0;
     for (auto x : str) 
     { 
@@ -203,6 +168,11 @@ int main()
             word = "";
             count++;
         }
+        else if (x == ' ')
+        {
+            word = "";
+            count++;
+        }
         else
         { 
             word = word + x; 
@@ -210,8 +180,72 @@ int main()
     }  
 
     cout << playerNum << "\n";
+    cout << ballNum << "\n";
+
+    //test
+    //playerNum = 30;
+    //ballNum = 5807;
+
     struct Node* circle = NULL;
-    // for (int i = 0; i < )
-  
+    map<int, long long> scores; // keep track of all the scores for all elfes 
+    map<int, long long>::iterator it;
+
+    for (int i = 1; i <= playerNum; i++)
+    {
+        scores.insert(pair<int,long long>(i,0));
+    }
+
+    insertEnd(&circle, 0);
+    struct Node* current = circle;
+    insertAfter(&circle, 1, current->next->data);
+    current = current->next;
+
+    for (long i = 2; i <= ballNum; i++)
+    {
+        if (i % 23 != 0)
+        {
+            struct Node* new_node = new Node;
+            new_node->data = i;
+            struct Node* temp1 = current->next;
+            struct Node* temp2 = current->next->next;
+            temp1->next = new_node;
+            new_node->prev = temp1;
+            new_node->next = temp2;
+            temp2->prev = new_node;
+            //insertAfter(&circle, i, current->next->data);
+            current = new_node;
+            //printf("%d\n", current->data);
+            //display(circle);
+        }
+        else
+        {
+            int match = i%playerNum;
+            if (match == 0) match = playerNum;
+            it = scores.find(match); 
+            if (it != scores.end()) it->second += i;
+            current = current->prev->prev->prev->prev->prev->prev;
+            //printf("%d\n", current->data);
+            if (it != scores.end()) it->second += current->prev->data;
+            struct Node* temp = current->prev->prev;
+
+            temp->next = current;
+            current->prev = temp;
+            //display(circle);
+            printf("%lld\n", it->second);
+        }
+    }
+
+    long long max = 0, tempMax = 0;
+
+    for (it = scores.begin(); it != scores.end(); ++it) { 
+        tempMax = it->second;
+        if (max < tempMax)
+        {
+            max = tempMax;
+        }
+        printf("%d %lld %lld\n", it->first, it->second, max);
+    } 
+
+    printf("%lld\n", max);
     return 0; 
 } 
