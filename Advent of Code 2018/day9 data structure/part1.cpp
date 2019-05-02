@@ -187,7 +187,7 @@ int main()
     //ballNum = 5807;
 
     struct Node* circle = NULL;
-    map<int, long long> scores; // keep track of all the scores for all elfes 
+    map<int, long long> scores; // keep track of all the scores for all elves 
     map<int, long long>::iterator it;
 
     for (int i = 1; i <= playerNum; i++)
