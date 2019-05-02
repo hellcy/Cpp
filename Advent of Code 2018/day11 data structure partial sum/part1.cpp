@@ -1,14 +1,8 @@
 #include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
 #include <string>
-#include <iterator> 
-#include <map> 
 using namespace std; 
 
 int serialNum = 9810;
-vector<int> cells;
 int sum[301][301];
 //int serialNum = 42;
 
@@ -29,34 +23,15 @@ int calGridPowerLevel(int x, int y)
 	calPowerLevel(x+2,y+1) + calPowerLevel(x,y+2) + calPowerLevel(x+1,y+2) + calPowerLevel(x+2,y+2);
 }
 
-//part2 random size grid
-int calRamdomGridPowerLevel(int x, int y, int size)
-{
-	int powerLevel = 0;
-	for (int i = 0; i < size; i++)
-	{
-		for (int j = 0; j < size; j++)
-		{
-			powerLevel += calPowerLevel(x + i, y + j);
-			//powerLevel += cells[x + j + 300 * (y - 1 + i)];
-		}
-	}
-	return powerLevel;
-}
-
 signed main()
 {
 	int finalX, finalY, finalZ, max = INT_MIN;
-    int bx, by, bs, best = INT_MIN;
 
 	for (int y = 1; y <= 300; y++)
 	{
 		for (int x = 1; x <= 300; x++)
 		{
-            int id = x + 10;
-            int p = id * y + serialNum;
-            p = (p * id) / 100 % 10 - 5;
-            sum[y][x] = p + sum[y - 1][x] + sum[y][x - 1] - sum[y - 1][x - 1];
+            sum[y][x] = calPowerLevel(x,y) + sum[y - 1][x] + sum[y][x - 1] - sum[y - 1][x - 1];
 		}
 	}
 
