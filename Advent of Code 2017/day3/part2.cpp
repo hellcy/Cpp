@@ -4,6 +4,13 @@
 #include <vector>
 using namespace std; 
 
+int cal(int n)
+{
+	if (n == 0) return 1;
+	
+}
+
+
 int main()
 {
 	ifstream f("input.txt"); //taking file as inputstream
