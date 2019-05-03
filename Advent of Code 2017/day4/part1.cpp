@@ -7,19 +7,14 @@ using namespace std;
 int main()
 {
 	ifstream f("input.txt"); //taking file as inputstream
-	string str;
-	if(f) {
-		ostringstream ss;
-		ss << f.rdbuf(); // reading data
-		str = ss.str();
-	}
-
-	vector<string> words;
-
-	string word;
+	int count = 0;
+	bool flag = false;
+	string line, word = "";
 	while (getline(f, line))
 	{
-	    for (auto x : str) 
+		flag = false;
+		vector<string> words;
+	    for (auto x : line) 
 	    { 
 	        if (x == ' ') 
 	        { 
@@ -37,10 +32,12 @@ int main()
 	    {
 	    	for (string j : words)
 	    	{
-	    		if (j == i)
+	    		if (j == i) flag = true;
 	    	}
 	    }
+	    if (flag == true) count++;
 	}
-	printf("%d\n", answer);
+
+	printf("%d\n", count);
 
 }
