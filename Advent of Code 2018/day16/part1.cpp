@@ -155,11 +155,10 @@ void eqrr()
 
 int main()
 {
-	ifstream f("test.txt"); //taking file as inputstream
+	ifstream f("input1.txt"); //taking file as inputstream
 	string line;
 	while (getline(f, line))
 	{
-		printf("%s\n", line);
 		if (line[0] == 'B')
 		{
 			before.push_back(line[9] - '0');
@@ -174,24 +173,7 @@ int main()
 			after.push_back(line[15] - '0');
 			after.push_back(line[18] - '0');
 		}
-		else
-		{
-		    for (auto x : line) 
-		    { 
-				if (x == ' ')
-		        {
-    				opcode.push_back(atoi(word));
-		            word = "";
-		            count++;
-		        }
-		        else
-		        { 
-		            word = word + x; 
-		        } 
-		    }
-		}
-
-		if (line.empty())
+		else if (line.empty())
 		{
 			//for (int i = 0; i < before.size(); i++)
 			//{
@@ -202,7 +184,7 @@ int main()
 			//for (int i = 0; i < before.size(); i++)
 			//{
 			//	printf("%d ", opcode[i]);
-			//}		
+			//}
 			//printf("\n");
 			//for (int i = 0; i < before.size(); i++)
 			//{
@@ -232,9 +214,27 @@ int main()
 			before.clear();
 			after.clear();
 			opcode.clear();
-			//printf("bitwise: %d\n", 5 | 9);
 		}
+		else 
+		{
+		    for (auto x : line) 
+		    { 
+				if (x == ' ')
+		        {
+    				opcode.push_back(stoi(word));
+		            word = "";
+		        }
+		        else
+		        { 
+		            word = word + x; 
+		        } 
+		    }
+			opcode.push_back(stoi(word));
+            word = "";
+		}
+		printf("%s\n", &line[0]);
+
 	}
-	printf("%d\n", likeCount);
+	printf("part1: %d\n", likeCount);
 	return 0;
 }
