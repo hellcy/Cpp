@@ -34,7 +34,7 @@ def get_node_data(puzzleInput, nodes=1):
 
 pos, childValue = get_node_data(puzzleInput)
 # print('Headers:', headerList)
-# print('Metameta:', metaList)
+print('Metameta:', metaList)
 result1 = sum(sum(metaList, []))
 print('Day 8 part 1 result: {}'.format(result1))
 print('Day 8 part 2 result: {}'.format(childValue[0]))

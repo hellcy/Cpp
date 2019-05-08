@@ -212,8 +212,9 @@ int main()
             new_node->prev = temp1;
             new_node->next = temp2;
             temp2->prev = new_node;
-            //insertAfter(&circle, i, current->next->data);
             current = new_node;
+            // insertAfter(&circle, i, current->next->data);
+            // current = current->next->next;
             //printf("%d\n", current->data);
             //display(circle);
         }
@@ -224,14 +225,14 @@ int main()
             it = scores.find(match); 
             if (it != scores.end()) it->second += i;
             current = current->prev->prev->prev->prev->prev->prev;
-            //printf("%d\n", current->data);
+            printf("%d\n", current->data);
             if (it != scores.end()) it->second += current->prev->data;
             struct Node* temp = current->prev->prev;
 
             temp->next = current;
             current->prev = temp;
             //display(circle);
-            printf("%lld\n", it->second);
+            //printf("%lld\n", it->second);
         }
     }
 

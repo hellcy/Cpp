@@ -15,7 +15,7 @@ int main()
 	bool twoFlag = false;
 	bool threeFlag = false;
 	ifstream file;
-	file.open("C:\\c++\\Cpp\\Advert of Code\\day2\\input.txt");
+	file.open("E:\\C++\\Advent of Code 2018\\day2\\input.txt");
 
 	if (!file) 
 	{
