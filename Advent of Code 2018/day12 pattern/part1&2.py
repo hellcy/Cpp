@@ -11,7 +11,7 @@ for l in ls:
       rules[r[0]] = r[2]
 
 def sum_plants(curr):
-   diff = (len(curr) - 100) // 2
+   diff = (len(curr) - 100) // 2 # handle the negative serial number. Initial length is 100
    sum = 0
    for i, c in enumerate(curr): # mark pots in numbers start from 0
       if c == '#':
@@ -19,6 +19,7 @@ def sum_plants(curr):
    return sum
 
 curr = init_state
+print(len(init_state))
 prev_sum = sum_plants(init_state)
 diffs = []
 num_iters = 1000
@@ -26,7 +27,7 @@ for i in range(num_iters):
    if(i == 20):
       print("Part 1: " + str(sum_plants(curr)))
    curr = "...." + curr + "...."
-   next = ""
+   next = "" # used to store plants information for next round
    for x in range(2, len(curr) - 2):
       sub = curr[x-2:x+3]
       next+= rules[sub]
