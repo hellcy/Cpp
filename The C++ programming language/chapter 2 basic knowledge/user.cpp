@@ -26,4 +26,7 @@ int main()
 		v[i] = i;
 	}
 	sqrt_sum(v);
+
+	Vector v2 = {1,2,3,4,5};
+	sqrt_sum(v2);
 }
