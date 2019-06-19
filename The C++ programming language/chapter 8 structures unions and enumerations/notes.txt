@@ -1,0 +1,37 @@
+第八章 结构 联合与枚举
+
+结构
+	struct是任意类型元素的集合
+	.点运算符访问struct的成员
+	->运算符访问struct pointer的成员
+	struct对象可以被赋值，传入函数参数，return
+
+	struct size align
+
+	struct只要名字一出现就可以被马上使用
+
+	struct是一种特殊的class
+
+	数组可以包含很多struct
+
+	struct也可以包含一个数组，这样就可以通过赋值struct来赋值其中的数组
+联合 union
+	union是一种特殊的struct，他的所有成员都分配在用一个地址空间上，因此一个union所占用的空间与其最大的成员一样，
+	在同一时刻只能保存一个成员的值
+
+	不可以通过先把值写入某个成员然后读取另一个成员的值来对其转化类型或取值
+
+	匿名union
+		匿名union是一个对象而非一种类型，我们无需对象名就能直接访问其成员
+		因此使用匿名union的成员的方式与使用类成员的方式完全一样，但是同一时间只能使用一个union的成员
+
+枚举 enumeration
+	存放一组整数值
+
+	enum class
+		两个enum class的枚举值之间即使名字相同也不会冲突，因为他们位于各自的enum class的作用域中
+
+	enum
+		普通enum枚举值的作用域与enum所在的作用域相等
+		所以两个普通enum的枚举值的名字不能相同
+		
